@@ -1,5 +1,10 @@
 window.sentence = '我们都是好朋友';
+window.sentence_enc = false;
 if (window.location.hash != '') window.sentence = decodeURI(window.location.hash).substring(1);
+if (window.sentence[0] =='_') {
+  window.sentence = Base64.decode(window.sentence.substring(1));
+  window.sentence_enc = true;
+}
 
 
 function GameManager(size, InputManager, Actuator, ScoreManager) {
@@ -24,7 +29,10 @@ GameManager.prototype.restart = function () {
 
 // Set up the game
 GameManager.prototype.setup = function () {
-  document.getElementsByClassName('title')[0].innerHTML = window.sentence;	
+  if (!window.sentence_enc)
+  	document.getElementsByClassName('title')[0].innerHTML = window.sentence;	
+  else
+	document.getElementsByClassName('title')[0].innerHTML = '... guess what?';	
   
   this.grid         = new Grid(this.size);
 
