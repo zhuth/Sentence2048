@@ -234,7 +234,7 @@ GameManager.prototype.tileMatchesAvailable = function () {
 
           var other  = self.grid.cellContent(cell);
 
-          if (other && ((other.value==tile.value && tile.value==1)||other.rank-tile.rank==1||other.rank-tile.rank==-1)) {
+          if (other && ((other.rank==tile.rank||other.rank-tile.rank==1||other.rank-tile.rank==-1)) {
             return true; // These two tiles can be merged
           }
         }
