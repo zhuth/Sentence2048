@@ -1,4 +1,6 @@
 window.sentence = '我们都是好朋友';
+if (window.location.hash != '') window.sentence = window.location.hash.substring(1);
+
 
 function GameManager(size, InputManager, Actuator, ScoreManager) {
   this.size         = size; // Size of the grid
