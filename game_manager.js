@@ -58,7 +58,7 @@ GameManager.prototype.addStartTiles = function () {
 GameManager.prototype.addRandomTile = function () {
   if (this.grid.cellsAvailable()) {
 	var value,rank;
-	if(Math.random() < 0.3){
+	if(Math.random() < 0.5){
 		value = window.sentence[0];
 		rank = 1;
 	}
@@ -130,8 +130,8 @@ GameManager.prototype.move = function (direction) {
         var next      = self.grid.cellContent(positions.next);
 
         // Only one merger per row traversal?
-        if (next && ((next.value==tile.value&& tile.value==1)||next.rank-tile.rank==1||next.rank-tile.rank==-1) && !next.mergedFrom) {
-		  var nrank= (next.value==tile.value&& tile.value==1)? 2:(next.rank>tile.rank? next.rank+1:tile.rank+1);
+        if (next && (next.rank-tile.rank==1||next.rank-tile.rank==-1||next.rank==tile.rank) && !next.mergedFrom) {
+		  var nrank= next.value == tile.value ? tile.rank : ((next.value==tile.value&& tile.value==1)? 2:(next.rank>tile.rank? next.rank+1:tile.rank+1));
           var merged = new Tile(positions.next, window.sentence[nrank-1],nrank);
           merged.mergedFrom = [tile, next];
 
